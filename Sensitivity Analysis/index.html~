@@ -1,0 +1,449 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="https://distill.pub/template.v1.js"></script>
+  <script type="text/javascript" src="../commons/scripts/Tangle.js"></script>
+  <script type="text/javascript" src="../commons/scripts/TangleKit/mootools.js"></script>
+  <script type="text/javascript" src="../commons/scripts/TangleKit/sprintf.js"></script>
+  <script type="text/javascript" src="../commons/scripts/TangleKit/BVTouchable.js"></script>
+  <script type="text/javascript" src="../commons/scripts/TangleKit/TangleKit.js"></script>
+  <script src="../commons/scripts/interactive_paper.js"></script>
+   <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG" align = "middle"></script>
+  <link rel="stylesheet" href="../commons/css/pubcss-acm-sigchi.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../commons/css/style.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../commons/css/style-shared.css" media="screen" />
+  <!-- TangleKit (optional) -->
+  <link rel="stylesheet" href="../commons/scripts/TangleKit/TangleKit.css" type="text/css">
+
+
+
+  <script type="text/javascript">
+
+  var tangle = null;
+
+  function setUpTangle () {
+
+      // tip: use as tangle root whatever element is an ancestor of all tangle elements.
+      var tangleRoot = document.getElementById("tangleRoot");
+
+      tangle = new Tangle(tangleRoot, {
+          initialize: function () {
+              // default analysis options, using Steegel's notation from Table 1
+              this.YR = 0;
+	      this.F = 0;
+	      this.S = 0;
+              this.fig1file = "no file.";
+	      this.fig2file = "no file.";
+	      this.fig3file = "no file.";
+	      this.fig4file = "no file."
+          },
+          randomize: function() {
+              // Set options to a random value. Used for animating the multiverse. Make sure
+              // all values are legal and accessible through the Tangle UI controls.
+
+              this.F = rnd_int(0, 4); 
+              this.NMO = rnd_int(0, 1); 
+              this.R = rnd_int(0, 2); 
+              this.ECL = rnd_int(0, 2); 
+              this.EC = rnd_int(0, 1); 
+          },
+          update: function () {
+              // update the figure
+              this.fig1file = "R/figures/fig-1-" + (this.YR+1) + ".jpg";
+	      this.fig2file = "R/figures/fig-2-" + (this.YR+1) + "-" + (this.F+1)+ ".jpg";
+	      this.fig3file = "R/figures/fig-3-" + (this.YR+1) + ".jpg";
+              this.fig4file = "R/figures/fig-4-" + (this.YR+1) + "-" + (this.S+1)+ ".jpg";
+              document.getElementById('fig1').src = this.fig1file;
+	      document.getElementById('fig2').src = this.fig2file;
+	      document.getElementById('fig3').src = this.fig3file;
+	      document.getElementById('fig4').src = this.fig4file;
+          }
+      });
+  }
+
+</script>
+
+
+
+
+  <!-- CSS code taken from pubcss that adds figure numbering also for the distill layout. -->
+  <style>
+  a[href^="#"].figure {
+    content: target-counter(attr(href, url), figure); }
+    a[href^="#"].figure::before {
+      content: "Figure "; }
+    a[href^="#"].figure::after {
+      content: ''; }
+    figure {
+        counter-increment: figure;
+    }
+
+    figcaption::before {
+          content: "Figure " counter(figure) ". ";
+    }
+
+</style>
+</head>
+
+<body id="tangleRoot" onload="setTimeout(function(){ afterImagePreload(); }, 1000);">
+
+<div id="loading" class="cover"><div class="cover-text">Loading...</div></div>
+<noscript class="cover"><div class="cover-text">This website requires <strong>javascript</strong> to display its content correctly. Please activate javascript and reload the page.</div></noscript>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- Start editing from here -->
+<!-- -------------------------------------------------------------------------------------- -->
+
+
+<!-- The front matter script below is required in exactly the shown format, i.e., don't remove the colons. -->
+<script type="text/front-matter">
+  title: "Increasing the Efficacy of Sensitivity Analysis with Explorable Multiverse Approach"
+  description: ""
+  authors:
+  - Pengyun Li: pengyun.li@mail.utoronto.ca
+  supervisor:
+  - Prof. Fanny Chevalier: http://fannychevalier.net/
+  affiliations:
+  - University of Toronto: https://www.utoronto.ca/
+</script>
+
+<dt-article>
+  <header class="col-span">
+    <!-- Due to different front matter procedures, we need to enter title and author information twice. -->
+    <h1 class="title">Increasing the Efficacy of Sensitivity Analysis with Explorable Multiverse Approach</h1>
+        <div class="authors col-2">
+          <div class="author">
+              <br>
+              <div><b>Pengyun Li</b></div>
+	      <div>University of Toronto</div>
+              <div>pengyun.li@mail.utoronto.ca</div>
+	      <br>
+          </div>
+          <div class="author">
+              <br>
+              <div><b>Supervisor: Fanny Chevalier</b></div>
+              <div>University of Toronto</div>
+              <div>http://fannychevalier.net/</div>
+	      <br>
+          </div>
+        </div>
+</header>
+<dt-byline></dt-byline>
+
+<h2 id="Abstract">Abstract</h2>
+
+<p>Sensitivity analysis is an analysis technique used to help analysts to decide on key factors that have significant impact on the output. Current research has made great effort on overcoming limitations of sensitivity analysis method. However, one big drawback of the subjectivity issue of sensitivity analysis cannot be solved by improving on models used. Therefore, in this paper, we will focus on improving the efficacy and transparency of sensitivity analysis with explorable multiverse approach in an attempt to alleviate the impact of subjectivity issue on decision makings. We will explore the applications of explorable multiverse approach on two categories of sensitivity analysis method, namely local and global method, to illustrate our ideas.</p>
+
+<h2 id="keywords">Author Keywords</h2>
+<p id="keywords">Sensitivity Analysis; Multiverse analysis.</p>
+  
+<!-- ACM articles are required to have the following sections which are hidden in the distill layout. -->
+
+
+<h2>Introduction</h2>
+
+<p>Sensitivity analysis plays an important role on helping analysts or decision makers to learn about the importance of different parameters in interest. It reveals how the different values of a set of independent variables affect a specific dependent variable under certain specific conditions. It is applicable to a broad range of areas such as environmental studies, energy systems, fiancial sectors and etc.</p>
+  
+<p>Current studies have put great focus on how to improve the accuracy and to overcome the limitations of sensitivity analysis in complex scenarios. For examples, the transformation from a local to global approach has taken correlations among input variables into account. In this paper, we will not explore deeper into the algorithms of sensitivity analysis method but mainly focus on increasing the efficacy and transparency of sensitivity analysis with explorable multiverse approach. Explorable multiverse approach is a new approach to statistical reporting where readers can explore alternative analysis options by interacting with the reports itself <dt-cite key="steegen2016increasing"></dt-cite>. This multiverse approach can be significant in improving the efficacy of sensitivity analysis as it enables the readers to interact with the report and extract relevant information according to their own needs while keeping the completeness of the information of datasets at the same time. Besides, the readers can choose the type of sensitivity analysis method as well.</p>
+  
+<p>In this paper, we will first talk about the explorable multiverse approach and the sensitivity anaylsis methods that we are going to use in our paper. More specifically speaking, we will include an overview of both local and global sensitivity analysis methods. For the local method, we will talk about one-at-a-time (OAT) method and for the global ones, Morris method and Sobol method will be included. Followed by these, we will analyse on the World Happiness Report from 2018 to 2019 as a case study and generate a sensitivity analysis report with our explorable multiverse approach to demonstrate how the efficacy and transparency od the sensitivity report can be improved. At the end, we will discuss further about our research for any potential improvements.</p>
+
+<h2 id="approach">Explorable Multiverse Approach</h2>
+
+<p>Explorable Multiverse Approach is a new approach for interactive statistical reporting. It enables readers to explore alternative analysis options by interacting with the paper itself.<dt-cite key="drag2019increasing"></dt-cite> There are two parts contained in this approach, namely explorable explanations and the multiverse analysis. Explorable explanations allow readers to actively change some elements of the original explanations for further explorations. Multiverse analysis refers to a philosophy of statistical reporting where the results of many different analyses are reported in order to demonstrate the robustness of the findings <dt-cite key="drag2019increasing"></dt-cite> This approach has been created in response to the rising criticisms regarding the credibility of human-subject research in many disciplines <dt-cite key="nelson2018psychology"></dt-cite>, and there have been increasing concerns for transparency in statistical reporting as well. <dt-cite key="cockburn2018hark"></dt-cite><dt-cite key="dragicevic2016fair"></dt-cite><dt-cite key="kay2016researcher"></dt-cite> </p>
+  
+<p>The significance for applying the explorable multiverse approach to sensitivity analysis includes allowing for active data constructions, increasing efficacy and transparency for analysis, and improving flexibility for any further data explorations. </p>
+
+<h2 id="method">Overview of Sensitivity Analysis Methods</h2>
+
+<h3>Local Sensitivity Analysis</h3>
+  
+<p>Local sensitivity analysis evaluates the sensitivity for a deterministic set of input parameters. Usually, it is based on partial derivatives of the response with respect to the parameters. One of the key advantages for a local sensitivity analysis is its convenience for computations as we only need N+1 model evaluations where N refers to the number of selected input parameters. It helps to give a rapid insight about the significance of a small number of inputs in interest.</p>
+
+<p>The most commonly used method in a local sensitivity analysis is One-at-a-time (OAT) method. <dt-cite key="ferretti2016trends"></dt-cite> The OAT method involves varying the input parameters one by one, keeping the other inputs fixed at a baseline (chosen by analysts), and then keep track of changes in the output. The results of OAT method is often displayed in the Pareto chart. The OAT analysis cannot be a robust method unless the model we used is linear or additive. Also, since we are only taking derivatives at the baseline points, there is not much information that we van gain from other input spaces, setting more limitations to the usefulness of this method. However, the OAT method is still widely used in many areas especially in financial sectors due to its computational simplicity <dt-cite key="campolongo2011screening"></dt-cite>.</p>
+
+
+
+<h3>Global Sensitivity Analysis</h3>
+  
+<p>A Global SA assesses the effect of large changes in the input parameters where it is more appropriate for uncertainty quantifications and thus requires many model evaluations compared to a local SA. Regardless of its much higher accuracy compared to a local SA, its large computational time due to high dimensions and complexity in modelling posed many challenges to analysts. In this part, we will also put focus on two main methods that are commonly used, i.e. variance- based and regression based methods.</p>
+
+<h3>(1) Morris Method</h3>
+
+<p>The morris method is used to screen the parameters by ranking their influence on the output. This method considers non-linearity among the variables and adopts a trajectory-based design. <dt-cite key="campolongo2011screening"></dt-cite>It operates along k trajectories with i single-parameter steps for each trajectory, where $k = \frac{1+4\times i}{i+1}$, and i is equal to the number of parameters used. A new trajectory will be used each time after all parameters have been moved once. <dt-cite key="norton2015intro"></dt-cite> We can compare the influence of each input variable according to their absolute mean value (i.e. mean(|EE|)), the higher the value the more significant the variable is. Also, the value of standard deviation (i.e. std(|EE|)) also indicates the extent of linearity, the higher the value, the stronger the correlation between the input parameter and the output. However, Morris method is more suitable for factor screening instead of prioritization, especially when there are a large number of input parameters.<dt-cite key="goh2019morris"></dt-cite> One well-known sampling for this is called "radial sampling"<dt-cite key="saltelli2010how"></dt-cite>, where we start from a random point in hyperspace of input variables one step and for each factor. This process is iterated for many times with different starting points where we could obtain a sample of elementary shifts for every parameter. The OAT method can be considered as a radial sampling of size one where only one "baseline" points are chosen. The Morris method, in this perspective, demonstrates a privilege in considering all input factors over their entire hyperspace globally rather than locally. </p>
+    
+<p>The Morris method is based on a replication of OAT designs and measures sensitivity from a set of elementary effects (i.e. EE_n) and local derivatives. The distribution of $EE_n$ should also be obtained. The input parameters are classified into 3 groups, namely the negligible effects, linear and additive effects, and non-linear and/or interaction effects.<dt-cite key="goh2019morris"></dt-cite> The algorithm for this is shown below:</p>
+  
+<p>By changing the $n^{th}$ parameter of a point $x=(x_1,...,x_{N_p}) \in \Omega$ by $\Delta$,
+  $${EE_n = \frac{\partial y}{\partial x_n}=\frac{1}{\Delta}(f(x_1,...,x_{n-1},x_n+\Delta,...,x_{N_p})-}$$
+  $${f(x_1,...,x_{n-1},x_n,...,x_{N_p}))}$$</p>
+<p>and</p>
+
+<p>$${\mu_n^* = \frac{1}{L}\sum^L_{l=1}|EE_n^{(l)}|, \sigma_n^2 = \frac{1}{L-1}\sum_{l=1}^L(EE_n^{(l)}-\mu_n)^2}$$</p>
+ <p>The $\mu_n$ measures the overall impact of the parameter on the response and $\sigma_n$ measures the non-linear and/or interaction effects. When $\sigma_n$ is large, it indicates that $EE_n$ is highly dependent on the choice of the sample point at which it is computed, and in this case, a local SA may not be the best approach. However, Morris method plays an important part in terms of identifying insignificant factors to remove from the study before moving into in a Global SA.</p>
+
+<p>In some cases where the input variables come with different units and magnitudes, or there is a need to ground an aggregated outputs on a  non-dimensional basis, a standardise elementary effect model may be required<dt-cite key="sin2009improve"></dt-cite>:</p>
+
+<p>\begin{align*}
+	SEE_{nk} = \frac{\partial y_k}{\partial x_n}\frac{\sigma_{x_n}}{\sigma_{y_k}}
+  \end{align*}</p>
+  
+<p> where $SEE_{nk}$ is the standardised elementary effect of the factor $x_n$ on the model output $y_k$.</p>
+
+
+
+<h3>(2) Sobol's Method</h3>
+
+  <p>Sobol's method is a variance-based global sensitivity analysis method to assess the relative importance of our input parameters. It focuses on measuring sensitivities using the proportion of variance changes of output caused by the input vairables individually and to combinations.<dt-cite key="norton2015intro"></dt-cite> The Sobol indices usually contains the main and total effects for input parameters and there is no need for any linearity assumptions.<dt-cite key="glen2012estimating"></dt-cite>In the variance- based analysis, we sum up all the partial variances of input parameters and represent the result as the output variance. For Sobol's method, the Sobol sensitivity indices are "ratio of partial variances to total variance".<dt-cite key="glen2012estimating"></dt-cite> The decomposition os total unconditional variance V(Y) into partial variances can be expressed as:<dt-cite key="goh2019morris"></dt-cite>
+  <p>$${V(Y)= \sum_i V_i + \sum_i\sum_{j>i}V_{ij}+ \sum_i\sum_{j>i}\sum_{k>j}V_{ijk}+...}$$</p>
+  <p>and the Sobol indices can be further represented as:</p>
+  <p>$${1= \sum_i S_i + \sum_i\sum_{j>i}S_{ij}+ \sum_i\sum_{j>i}\sum_{k>j}S_{ijk}+...}$$</p>
+   <p>which this decomposition has taken all interaction effects into account. Usually, we are more interested in $S_j$ (main effect sensitivity index for the variable j) and $S_T$ (total effect index for variable j, which considers all relavent interactions).</p>
+
+  <p>For convenience, we will use $S_{1i}$ and $S_{Ti}$ to denote the first-order main effect and total effect respectively for the i-th variable, both of them can be evaluated using j+2 model runs with N (chosen by analysts) iterations for each run. And we define $S_{1i}$ <dt-cite key="homma1996importance"></dt-cite><dt-cite key="norton2015intro"></dt-cite><dt-cite key="goh2019morris"></dt-cite> as:</p>
+
+<p> $${S_{1i} = \frac{V_{X_i}(E_{X_{\sim i}}(Y|X_i))}{V(Y)}}= \frac{V_{1i}(Y)}{V(Y)}$$</p>
+  <p>where $X_i$ is the i-th variable, $X_{\sim i}$ refers to the matrix of all other input variables except for i.</p>
+  <p>Similarly, we define $S_{Ti}$ <dt-cite key="homma1996importance"></dt-cite> <dt-cite key="saltelli2002on"></dt-cite><dt-cite key="norton2015intro"></dt-cite><dt-cite key="goh2019morris"></dt-cite>as:</p>
+<p>$${S_{Ti} = \frac{E_{X_{\sim i}}(V_{X_i}(Y|X_{\sim i}))}{V(Y)}}= \frac{V_{Ti}(Y)}{V(Y)}$$.</p>
+
+<p>Note that for models with additivity, $S_{1i}=S_{Ti}$ for all parameters. </p>
+
+<p>To compute the sensitivity indices more efficiently, the radial sampling can be applied by choosing a random point first and moving the factor one step from the same start point in the hyperspace of all input factors. Also, note that Sobol indices provide a quantitative interpretation by showing the fraction of total variance while the Morris indices follow smooth spatial patterns<dt-cite key="herman2013tech"></dt-cite> and does not support that.</p>
+ 
+
+<h2 id="case study">Case Study</h2>
+
+<p>In this part, we will use the datasets of World happiness report to illustrate how explorable multiverse approach contributes to higher efficacy of sensitivity analysis. Note that since the purpose for this paper is to demonstrate the idea of how explorable multiverse approach could help increase efficacy of sensitivity analysis, the case we have chosen is thus not a complex one with high computational costs. There are many ways to classify the analysis parameters  <dt-cite key="drag2019increasing"></dt-cite> as in this case, we will make use of data substitution, data processing and modeling parameter pipelines. There are 3 csv files in total, i.e. the 2018 World Happiness Report, the 2019 World Happiness Report and the 2018&2019 Happiness Report, where readers can choose which data they want to investigate on based on their own interest. Each dataset consists of 9 columns including "Country or Region", "Year", "GDP per capita", "Social Support" ,"Healthy life Expectancy" ,"Freedom to make life choices" ,"Generosity", "Perception of Corruption" and "Score". What we are interested into is to figure out which input factors are most significant in determining the happiness scores on a global base. The input variables are "GDP per capita", "Social Support" ,"Healthy life Expectancy" ,"Freedom to make life choices" ,"Generosity" and "Perception of Corruption", and our dependent variable is the "Score".</p>
+
+<p>We first used linear gression to build the model for the 3 datasets respectively. The R- squared for the three reports are 0.7891, 0.7792, and 0.7832 respectively, which can be considered as a substantial level (R-sqaured above 0.75) of predictive accuracy.<dt-cite key="hair2014partial"></dt-cite></p>
+
+<p>By applying the explorable multiverse approach, the readers are not only  allowed to pick up their desired year of report but also allowed to choose different sensitivity analysis method. This can be very significant in real life to reduce time wastage caused by unmatched results between what analysts present and what decision makers desired. By making the sensitivity report more multiverse and interactive, its efficacy can thus be increased. In this case study, we provide the readers with 3 different methods, namely the local one-factor-at-a-time (OAT) method, Morris method and Sobol method.</p>
+
+  <p>First, the readers can choose which dataset they want to analyse on:</p>
+<p>  
+<ul data-var="YR" class="TKList">
+  <li>2018 World Happiness Report</li>
+  <li>2019 World Happiness Report</li>
+  <li>2018&2019 World Happiness Report</li>
+</ul>
+</p>
+
+  <p>After choosing the specific report, the coorelation matrix between any pair of variables for this dataset is shown below. We can find that the correlation among the input variables are generally low (i.e. correlation < 0.5), suggesting that a linear model can be a desirable model for our analysis. The corresponding Cormatrix for the year of interest is shown below:</p>
+<p>
+<figure class="l-middle side clearfix">
+    <img class="single" id="fig1" width="100%"/>
+    <figcaption>Cormatrix
+    </figcaption>
+</figure>
+</p>
+
+  <p>As we have mentioned above, the multiverse explorable approach allows our readers to choose their own method of interest to conduct the sensitivity analysis. From the previous sections, we have mentioned three methods, including one local method (OAT method) and teo global methods (Morris and Sobol method). Starting with the local one, for OAT method, the results is usually presented as a Tornado Plot. This plot shows the extent of changes for the output when exactly one of the input parameters moves. The redears can choose to see a separate Tornado plot or a verged version freely.</p>
+<p>
+<ul data-var="F" class="TKList">
+  <li>Separate Tornado</li>
+  <li>Merged Tornado</li>
+</ul>
+</p>
+<p> 
+<figure class="l-middle side clearfix">
+    <img class="single" id="fig2" width="100%"/>
+    <figcaption>Tornado Plot for Local OAT Method
+    </figcaption>
+</figure>   
+</p>
+<p> We can see from the results that for all the three datasets, if we use the local method for interpretation, the input "Social Support" seems to be the most important driver to the happiness score.</p>
+
+<p>However, notice that a local sensitivity method may not be accurate since it does not take any interactions between the variables into account. To take all possible relationships into consideration, a global sensitivity analysis method need to be applied.</p>
+
+<p>The results for the Morris Method is shown as below:</p>
+
+<p>
+ <figure class="l-middle side clearfix">
+    <img class="single" id="fig3" width="100%"/>
+    <figcaption>Morris Method
+    </figcaption>
+ </figure>
+</p>
+ <p>For Morris method, we need to determine the number of trajectories for comparability purposes. In this case, since the number of input variables is 6, the number of trajectories, rounded to an integer, should be (1+4*6)/(6+1) = 4. Usually, Morris method is more suitable for screening process, i.e. we can remove the least important parameters from our consideration. However, since our model is linear and the input size is small, it will not bring much difference to the result if we look for the parameter that is most significant. As seen from the table above, we can see that the most important factor (i.e. with largest mean|EE| value), is the GDP per capita for 2018 and 2018&2019 resports, and Social Support is the most important factor in the 2019 Happiness report. Note that this result is different from what we have derived from the local approach. </p>
+<div>
+<p>Now, for the Sobol Method, readers can choose which degree of Sobol indices that they are interested into. Again, since the correlations among input variables are relatively low, the S_1 and S_T indices will not differ much.</p>
+<p>
+<ul data-var="S" class="TKList">
+  <li>S1</li>
+  <li>ST</li>
+  <li>S1 & ST</li>
+</ul>
+</p>
+<p> The corresponding values for Sobol indices is shown below:</p>
+<p>
+<figure class="l-middle side clearfix">
+    <img class="single" id="fig4" width="100%"/>
+    <figcaption>Sobol Method
+    </figcaption>
+ </figure>
+</p>
+<p>As seen from the results above, we can find that for all the three reports, results coincide with the Morris method.</p> 
+
+<p> Therefore, from this case study, we can see that the explorable multiverse approach enables us to explore alternative methods in sensitivity analysis and provides us with more flexible options in choosing datasets. It has therefore improved the efficacy and transparency for a sensitivity analysis report where readers can actively interact with the report while getting accessed to a more completed information compared to a traditional statistical report. </p>
+
+<h2>Discussion</h2>
+<p>Even though an explorable multiverse analysis could help increase the efficacy and transparency of sensitivity analysis, we should still keep in mind that the multiverse analysis is highly context-specific and inherently subjective.<dt-cite key="steegen2016increasing"></dt-cite> It is impossible to completely get rid of subjectivity issue for sensitivity reporting as listing the alternative options for data construction involves judgment about how we are going to categorize the datasets, and what sensitivity analysis methods should be considered. Also, depending on the case, some external factors such as computational costs will be considered, setting more limitations to methods that we can use. However, regardless of the undesirable subjectivity, the explorable multiverse analysis indeed provides a more efficient and flexible way for data communications and makes its effort in alleviating the subjectivity issue by providing more thorough options for data interpretations.</p>
+<p>Generally speaking , for sensitivity analysis, the explorable multiverse analysis can achieve its maximum efficacy in cases where computational costs are not very high to analysts, such as in financial sectors or when the size of input parameters are not very large. In cases where computational costs are very high, it will be unrealistic and unneccessary to conduct various sensitivity alalysis methods for comparison, so analysts should focus on a specific method and conduct a thorough sensitivity analysis report using the multiverse approach in an attempt to capture more testing cases. As we have mentioned above, the multiverse approach can be very context-specific, so analysts should make proper adjustments under different screnatios to improve efficacy and transparency of sensitivity reports.</p> 
+
+<h2>Conclusion</h2>
+<p> In this paper, we have applied explorable multiverse approach to sensitivity analysis. Through the case study of analysing on the World Happiness Report, we have demonstrated how this approach could help improve the efficacy and transparency of a sensitivity report. We hope that this paper could bring more inspirations to researchers and industrial analysts who aim to maximize the efficacy of sensitivity analysis in a more transparent and flexible manner.</p>
+</div>
+</dt-article>
+
+<dt-appendix>
+</dt-appendix>
+
+<script type="text/bibliography">
+@article{steegen2016increasing,
+  title={Increasing transparency through a multiverse analysis},
+  author={Steegen, Sara and Tuerlinckx, Francis and Gelman, Andrew and Vanpaemel, Wolf},
+  journal={Perspectives on Psychological Science},
+  volume={11},
+  number={5},
+  pages={702--712},
+  year={2016},
+  publisher={Sage Publications Sage CA: Los Angeles, CA}
+}
+@article{drag2019increasing,
+  title={Increasing the Transparency of Research Papers with Explorable Multiverse Analyses},
+  author={Pierre Dragicevic, Yvonne Jansen, Abhraneel Sarma, Matthew Kay, Fanny Chevalier},
+  journal={CHI 2019 - The ACM CHI Conference on Human Factors in Computing Systems},
+  year={2019},
+}
+@article{nelson2018psychology,
+  title={Psychology’s renaissance},
+  author={Leif D Nelson, Joseph Simmons, and Uri Simonsohn},
+  journal={Annual review of psychology},
+  volume={69},
+  year={2018}
+}
+@article{cockburn2018hark,
+  title={Hark no more: on the preregistration of CHI experiments},
+  author={Andy Cockburn, Carl Gutwin, and Alan Dix},
+  journal={Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems},
+  pages={141},
+  year={2018},
+  publisher={ACM}
+}
+@article{dragicevic2016fair,
+  title={Fair statistical communication in HCI},
+  author={Pierre Dragicevic},
+  journal={Modern Statistical Methods for HCI},
+  pages={291--330},
+  year={2016},
+  publisher={Springer}
+}
+@article{kay2016researcher,
+  title={Researcher centered design of statistics: Why Bayesian statistics better fit the culture and incentives of HCI},
+  author={Matthew Kay, Gregory L Nelson, and Eric B Hekler},
+  journal={Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems},
+  pages={4521--4532},
+  year={2016},
+  publisher={ACM}
+}
+@article{ferretti2016trends,
+  title={Trends in sensitivity analysis practice in the last decade},
+  author={Federico Ferretti, Andrea Saltelli, Stefano Tarantola},
+  journal={Science of the Total Environment},
+  year={2016},
+  publisher={Elsevier B.V.}
+}   
+@article{campolongo2011screening,
+  title={From screening to quantitative sensitivity analysis. A unified approach},
+  author={Francesca Campolongo, Andrea Saltelli, Jessica Cariboni},
+  journal={Computer Physics Communications},
+  volume={182},
+  pages={978--988},
+  year={2011},
+  publisher={Elsevier B.V.}
+}
+@article{norton2015intro,
+  title={An introduction to sensitivity assessment of simulation models},
+  author={John Norton},
+  journal={Environmental Modelling & Software},
+  volume={69},
+  pages={166--174},
+  year={2015},
+  publisher={Elsevier Ltd.}
+}
+@article{goh2019morris,
+  title={Morris Method with Improved Sampling Strategy and Sobol’ Variance-based Method, as Validation Tool on Numerical Model of Richard’s Equation},
+  author={Sunny Goh},
+  journal={Journal of Geography and Cartography},
+  volume={2},
+  year={2019},
+  publisher={EnPress Publisher LLC.}
+}
+@article{saltelli2010how,
+  title={How to avoid a perfunctory sensitivity analysis},
+  author={Andrea Saltelli, Paola Annoni},
+  journal={Environmental Modelling & Software},
+  volume={25},
+  pages={1508--1517},
+  year={2010},
+  publisher={Elsevier Ltd.}
+}
+@article{sin2009improve,
+  title={Improving the Morris method for sensitivity analysis by scaling the elementary effects},
+	 author={Gürkan Sin, Krist V. Gernaey},
+  journal={19th European Symposium on Computer Aided Process Engineering},
+  year={2009},
+  publisher={Elsevier B.V.}
+}
+@article{glen2012estimating,
+  title={Estimating Sobol sensitivity indices using correlations},
+  author={Graham Glen, Kristin Isaacs},
+  journal={Environmental Modelling & Software},
+  volume={37},
+  pages={157--166},
+  year={2012},
+  publisher={Elsevier Ltd.}
+}  
+@article{homma1996importance,
+  title={Importance measures in global sensitivity analysis of nonlinear models},
+  author={Toshimitsu Homma, Andrea Saltelli},
+  journal={Reliability Engineering and System Safety},
+  volume={52},
+  number={1},
+  pages={1-17},
+  year={1996}
+}
+@article{saltelli2002on,
+  title={On the Relative Importance of Input Factors in Mathematical Models: Safety Assessment for Nuclear Waste Disposal},
+  author={Andrea Saltelli, Stefano Tarantola},
+  journal={Journal of the American Statistical Association},
+  volume={97},
+  number={459},
+  pages={702--709},
+  year={2002},
+  publisher={Taylor & Francis, Ltd. on behalf of the American Statistical Association}
+}
+@article{herman2013tech,
+  title={Technical Note: Method of Morris effectively reduces the computational demands of global sensitivity analysis for distributed watershed models},
+  author={J.D. Herman, J.B. Kollat, P.M. Reed, T. Wagener},
+  journal={Hydrology and Earth System Sciences},
+  volume={17},
+  pages={2893--2903},
+  year={2013}
+}
+@article{hair2014partial,
+  title={Partial Least Squares Structural Equation Modeling (PLS-SEM): An Emerging Tool for Business Research},
+  author={Hair, Joe & Sarstedt, Marko & Hopkins, Lucas & Kuppelwieser, Volker},
+  journal={European Business Review},
+  volume={26},
+  pages={106-121},
+  year={2014}
+}
+
+</script>
+
+</body>
